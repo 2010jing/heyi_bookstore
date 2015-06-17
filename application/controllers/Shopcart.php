@@ -35,13 +35,19 @@ class Shopcart extends CI_Controller {
 		$bid = $_POST['id'];
 		$num = $_POST['num'];
 		$type = $_POST['type'];
-		$this->load->model('Books_model');
-		$result = $this->Books_model->bookDetail($bid);
-		if(!empty($result)){
-			$cart = new Cart($bid,$result->booktitle,$result->bookimg,$result->price,$num,$type);
+
+		if( $type == "delall"){
+			$cart = new Cart($bid,'','','','',$type);
 		}else{
-			redirect(base_url(''));
+			$this->load->model('Books_model');
+			$result = $this->Books_model->bookDetail($bid);
+			if(!empty($result)){
+				$cart = new Cart($bid,$result->booktitle,$result->bookimg,$result->price,$num,$type);
+			}else{
+				redirect(base_url(''));
+			}
 		}
+		
 
 	}
 }

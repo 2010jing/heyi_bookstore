@@ -6,19 +6,74 @@
     		num = num < 1 ? 1 : num;
             num = num - 1;
             num = num < 1 ? 1 : num;
-    		txt.val(num);
-            setTotal(num,id); //根据 num price id  设值
-            calTotal();
+
+            var bid = id.replace("_","");
+
+            $.ajax({//Make the Ajax Request
+                type: "POST",
+                url: "/heyi_bookstore/shopcart/add",
+                data: {id:bid,num:1,type:'minus'},
+                success: function(html){//html = the server response html code
+                    txt.val(num);
+                    setTotal(num,id); //根据 num price id  设值
+                    calTotal();
+                }
+            });
 
     	});
 
     	$(".pay_num_add").click(function(){
     		var me =$(this), txt = me.prev(":text"),id = me.parent().find('>input:last').val();
     		var num = parseFloat(txt.val()) + 1;
-    		txt.val(num );
-            setTotal(num,id); //根据 num price id  设值
-            calTotal();
+            var bid = id.replace("_","");
+
+            $.ajax({//Make the Ajax Request
+                type: "POST",
+                url: "/heyi_bookstore/shopcart/add",
+                data: {id:bid,num:1,type:'add'},
+              
+                success: function(html){//html = the server response html code
+                    txt.val(num);
+                    setTotal(num,id); //根据 num price id  设值
+                    calTotal();
+                }
+            });
+
+    		
     	});
+
+        $(".delitem").click(function(){
+            var me =$(this), id = me.next(":hidden").val();
+            var bid = id.replace("_","");
+
+            
+            $.ajax({//Make the Ajax Request
+                type: "POST",
+                url: "/heyi_bookstore/shopcart/add",
+                data: {id:bid,num:0,type:'delitem'},
+                success: function(html){//html = the server response html code
+                    
+                    $(this).parent().parent().remove(); 
+                    calTotal();
+                }
+            });
+
+        });
+
+        $(".delall").click(function(){
+            var me = $(this);
+            
+            $(this).parent().parent().parent().remove(); 
+
+            $.ajax({//Make the Ajax Request
+                type: "POST",
+                url: "/heyi_bookstore/shopcart/add",
+                data: {id:0,num:0,type:'delall'},
+                success: function(html){//html = the server response html code
+                }
+            });
+
+        });
 
         
         var total = 0;

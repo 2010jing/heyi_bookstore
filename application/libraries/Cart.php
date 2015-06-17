@@ -25,6 +25,8 @@ class Cart {
 			$this->price = $price;
 			$this->num = $num;
 			$this->addtocart($bid,$booktitle,$bookimg,$price,$num,$type);
+		}else{
+			$this->removeall();
 		}
 			
 	}
@@ -33,12 +35,17 @@ class Cart {
 
 		if(!empty($_COOKIE['cart'])){
 			//存在,检测是否存在相同的item, 如果没有,就记入一个新数组, 否则则修改数据
-			if($this->checkitem($bid)){
-
-				$this->modify($bid,$num,$type);
+			if($type == "delall"){
+				$this->removeall();
 			}else{
-				$this->add($bid,$booktitle,$bookimg,$price,$num);
+				if($this->checkitem($bid)){
+					$this->modify($bid,$num,$type);
+				}else{
+					$this->add($bid,$booktitle,$bookimg,$price,$num);
+				}
 			}
+
+			
 
 		}else{
 			//不存在,创建新的cookie,并添加到 value
@@ -65,8 +72,16 @@ class Cart {
 			$sum = number_format($sum, 2, '.', '');   // 1234.57（我一般用这个）
 			$olddata[$cookie_id]['sum'] = $sum;
 
-		}else if($type == 'change'){
+		}else if($type == 'minus'){
+			$num = $olddata[$cookie_id]['num'] - $num;
+			$num = $num < 1 ? 1 : $num;
 			$olddata[$cookie_id]['num'] = $num;
+			$sum = $num * $olddata[$cookie_id]['price'];
+			$sum = number_format($sum, 2, '.', '');   // 1234.57（我一般用这个）
+			$olddata[$cookie_id]['sum'] = $sum;
+
+		}else if($type == 'delitem'){
+			unset($olddata[$cookie_id]);
 		}
 
 		$new_data = serialize($olddata);
@@ -101,6 +116,7 @@ class Cart {
 			'expire' => '0'
 		);
 		set_cookie($cookie);
+		//setcookie('cart','');
 	}
 
 	//sava new cookie

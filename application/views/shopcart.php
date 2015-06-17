@@ -27,13 +27,7 @@
 <div id="wrap">
     <div class="container">
 
- 
-
-              <?php $this->load->view('nav')?>
-
-
-
-
+        <?php $this->load->view('nav')?>
 
         <!-- Example row of columns -->
         <div class="row white-area">
@@ -44,7 +38,6 @@
                     # code...
                     ?>
 
-                
                
             <div class="row">
                 <div class="col-md-1">
@@ -78,15 +71,19 @@
                    
                 </div>
                 <div class="col-md-1">
-                    <p>删除</p>
+                    <a href="javascript:;" class="delitem">删除</a>
+                    <input type="hidden" value="<?php echo $key;?>">
                    
                 </div>
             </div>
-            <hr class="divider">
-        <?php }
-                }
+            <?php }
+                    }
 
             ?> 
+
+            <?php 
+                if(!empty($_COOKIE['cart'])){
+             ?>       
 
             <div class="row">
                 <div class="col-md-1">
@@ -112,10 +109,13 @@
                    
                 </div>
                 <div class="col-md-1">
-                    <p>删除</p>
+                    <!-- <p class="delitem">删除</p> -->
+                    <a href="javascript:;" class="delall">删除</a>
                    
                 </div>
             </div>
+
+            <?php } ?>
         <div class="row white-area">
 
             

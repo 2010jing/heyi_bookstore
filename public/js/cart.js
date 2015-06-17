@@ -17,8 +17,6 @@
     		txt.val(val + 1);
     	});
 
-        
-
 
     })[0].onselectstart = new Function ("return false");
 
