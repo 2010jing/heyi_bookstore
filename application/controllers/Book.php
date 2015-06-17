@@ -49,6 +49,7 @@ class Book extends CI_Controller {
 		$result = $this->Books_model->majorSearch();
 		$data['searchresult'] = $result;
 		$this->load->view('majorsearch',$data);
+		
 	}
 
 
@@ -85,6 +86,18 @@ class Book extends CI_Controller {
 
 		}
 
+	}
+
+
+	public function addOneToCart($bid,$num){
+		$this->load->model('Books_model');
+		$result = $this->Books_model->bookDetail($bid);
+		if(!empty($result)){
+			$cart = new Cart($bid,$result->booktitle,$result->bookimg,$result->price,$num,'add');
+		}else{
+			redirect(base_url(''));
+
+		}
 	}
 
 

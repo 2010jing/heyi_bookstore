@@ -5,3 +5,163 @@
 5. 个人页面  -- 1.个人资料页面(可编辑)  2. 个人预定课本查看  3.历史购买记录查询
 6. 管理员后台管理 -- 1.添加新书资料 2.更新书本资料 3.显示预定书本进度 4.管理支付订单
 7. 支付宝支付订单处理 ?? 未知数
+8. 用户忘记密码, 重新设置密码
+
+
+------------------------------------------------------
+
+1. 接口文档
+
+Controller
+	-- Auth
+			-- index()
+				-- 参数: 无
+				-- 说明: 如果用户未登录,则进入到登录页面;否则返回首页
+				-- view: login
+
+			-- register()
+				-- 参数: 无
+				-- 说明: 如果用户未登录,则进入到注册;否则返回首页 
+				-- view:  register
+
+			-- signin()
+				-- 参数: 无
+				-- 说明: 根据用户提交登录表单数据,登录系统
+				-- view: 无
+
+			-- signup()
+				-- 参数: 无
+				-- 说明: 根据用户提交注册表单数据,注册用户信息
+
+			-- sendEmail($email,$subject,$message,$type)
+				-- 参数
+					-- $email:收件人邮箱地址
+					-- $subject:邮件标题
+					-- $message:邮件内容
+					-- $type:类型
+				-- 说明: 发送邮件
+				-- view: 无
+
+			-- logout()
+				-- 参数: 无
+				-- 说明: 注销用户
+				-- view: 无
+
+			-- activeUser($id_num,$token)
+				-- 参数
+					-- $id_num:用户 id
+					-- $token: token验证
+				-- 说明: 根据用户 id 和 token 验证激活
+				-- view: 无
+
+			-- updateUserStatus($id)
+				-- 参数
+					-- $id:用户	 id
+				-- 说明: 根据用户 id 更新用户 status
+				-- view: 无
+
+			-- deleteUserNotActiveBySid($id)
+				-- 参数
+					-- $id:用户	 id
+				-- 说明: 根据用户 id 删除未激活用户
+				-- view: 无
+
+			-- encode_text($tex,$key,$type="encode",$expiry=0)
+				-- 参数
+					-- $tex:加密/解密 字符串
+					-- $key: 加密key值
+					-- $type: encode / decode
+					-- $expiry: 有效时长
+				-- 说明: 给定字符串加密/解密
+				-- view: 无
+
+
+
+
+
+
+
+Model
+	-- User_model
+		-- getUser()
+			-- 参数:无
+			-- 返回:一条用户数据记录
+			-- 说明:根据用户提交表单信息返回一条数据记录
+
+		-- checkValidRegister()
+			-- 参数:无
+			-- 返回:一条用户数据记录
+			-- 说明:根据用户提交表单信息返回一条数据记录,用于校验用户是否有效
+
+		-- registerUser()
+			-- 参数:无
+			-- 返回:一个新加如记录的 id
+			-- 说明: 写入新用户注册信息,并返回 id值
+
+		-- getUserById($id)
+			-- 参数
+				-- $id: 用户 id 值
+			-- 返回:一条用户数据记录
+			-- 说明:根据用户 id查询,返回一条数据记录
+
+		-- updateUserStatus($id)
+			-- 参数
+				-- $id: 用户 id 值
+			-- 返回: 影响记录的条数,一般为1
+			-- 说明:根据用户 id更新用户的 status ,返回一条记录数
+
+		-- getUserStatus($id)
+			-- 参数
+				-- $id: 用户 id 值
+			-- 返回:一条用户数据记录
+			-- 说明:根据用户 id查询,返回一条数据记录
+
+		-- deleteUserById($id)
+			-- 参数
+				-- $id: 用户 id 值
+			-- 返回:无
+			-- 说明:根据用户 id查询,删除一条数据
+
+
+
+
+2. 代码规范
+example:
+
+	public function cart(){
+		$bid = $_POST['id'];
+		$num = $_POST['num'];
+		$type = $_POST['type'];
+		$this->load->model('Books_model');
+		$result = $this->Books_model->bookDetail($bid);
+		if(!empty($result)){
+			$cart = new Cart($bid,$result->booktitle,$result->bookimg,$result->price,$num,$type);
+		}else{
+			redirect(base_url(''));
+
+		}
+	}
+
+	注意缩进  以一个 tab size = 4 键为标准
+
+
+
+3. 数据整理
+table:
+	heyi_book
+		`id`, `arno`, `coursecode`, `coursename`, `levelchoice`, `category`, `booktitle`, `bookimg`, `abstract`, `author`, `publisher`, `version`, `isbn`, `price`, `recommendation`, `division`, `major`, `semester`, `grade`, `teachby`
+
+	根据 uic 官网的 study-plann book 与合一书店提供的 excel表 来整理数据
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -32,11 +32,13 @@ class User_model extends CI_Model {
         $this->name=$_POST['name'];
         $this->email=$_POST['email'];
         $this->password=md5($_POST['password']);
-        $this->studentid="123";
+        $this->studentid="";
         $this->division=$_POST['division'];
         $this->tel=$_POST['tel'];
         if(strpos($_POST['email'],"@mail.uic.edu.hk")){
             $this->role='student';
+            $studentid = str_replace("@mail.uic.edu.hk","",$_POST['email']);
+            $this->studentid=$studentid;
         }elseif(strpos($_POST['email'],"@uic.edu.hk")){
             $this->role="teacher";
         }else{
@@ -76,22 +78,27 @@ class User_model extends CI_Model {
       $this->db->delete('heyi_user');
     }
      
+    function getUserByEmailName(){
+        $email=$_POST['email'];
+        $name=$_POST['name'];
+        $this->db->where('email', $email);
+        $this->db->where('name', $name);
+        $this->db->where('status', '1');
+        $query = $this->db->get('heyi_user');  
+        return $query->first_row();
+    }
 
+    function updateUserPassword(){
+        $password=md5($_POST['password']);
+        $uid=$_POST['uid'];
+        $this->db->set('password', $password);
+        $this->db->where('id', $uid);
+        $this->db->update('heyi_user');
+        return $this->db->affected_rows();
+    }
     //===================================
 
 
-
-
-
-
-
-    function updateUserPassword($studentid){
-        $password=md5($_POST['password']);
-        $this->db->set('password', $password);
-        $this->db->where('studentid', $studentid);
-        $this->db->update('user');
-        return $this->db->affected_rows();
-    }
 
 
 

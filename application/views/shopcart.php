@@ -68,7 +68,6 @@
                                 <input onpaste="return false" type="text" value="<?php echo $book['num'];?>" name="buy_num<?php echo $key?>" id="buy_num<?php echo $key?>" class="text" style="ime-mode:disabled" readonly="readonly">
                                 <span  class="pay_num_add" id="num_add"><i class="fa fa-plus"></i></span>
                                 <input type="hidden" value="<?php echo $key;?>" >
-
                                 件
                     </div>
                    

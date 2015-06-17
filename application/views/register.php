@@ -42,31 +42,31 @@
               <form class="form-horizontal" id="signupForm" action="<?=base_url('auth/signup')?>" method="post">
                 <div class="form-group">
                   <label for="name" class="col-sm-2 control-label"><i class="fa fa-user fa-fw"></i></label>
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <input type="text" class="form-control" name="name" id="name"  placeholder="Nickname">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="email" class="col-sm-2 control-label"><i class="fa fa-envelope-o fa-fw"></i></label>
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <input type="email" class="form-control" name="email" id="email"  placeholder="UIC Email">
                   </div>
                 </div>                <div class="form-group">
                   <label for="password" class="col-sm-2 control-label"><i class="fa fa-key fa-fw"></i></label>
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <input type="password" class="form-control" name="password" id="password"  placeholder="Password">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="repassword" class="col-sm-2 control-label"><i class="fa fa-key fa-fw"></i></label>
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <input type="password" class="form-control" name="repassword" id="repassword"  placeholder="Re Password">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="major" class="col-sm-2 control-label"><i class="fa fa-graduation-cap fa-fw"></i></label>
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <!-- <input type="text" class="form-control" name="major" > -->
                     <select class="form-control" name="division">
                       <option value="DST">DST</option>
@@ -79,8 +79,8 @@
                 </div>
                 <div class="form-group">
                   <label for="tel" class="col-sm-2 control-label"><i class="fa fa-mobile-phone fa-2x"></i></label>
-                  <div class="col-sm-5">
-                    <input type="telephone" class="form-control" name="tel" id="tel" placeholder="137262049xx">
+                  <div class="col-sm-6">
+                    <input type="tel" class="form-control" name="tel" id="tel" placeholder="137262049xx">
                   </div>
                 </div>
                 
@@ -126,6 +126,7 @@
 
     <?php $this->load->view('script')?>
     <script src="<?=base_url('public/js/signupform.js')?>"></script>
+    <script src="<?=base_url('public/js/additional-methods.js')?>"></script>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) 

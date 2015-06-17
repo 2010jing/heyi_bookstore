@@ -20,56 +20,55 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
- 
   </head>
 <body>
 
 <div id="wrap">
     <div class="container">
 
-        
               <?php $this->load->view('nav')?>
 
 
-        
-        <div class="row white-area">
+          
+        <!-- end of slider -->
 
+<div class="row service_info"> 
+          <div class="col-md-6"> 
+            <img alt="Register" class="graphicdesign-img-left" src="<?=base_url('public/images/book/finalproduct.jpg')?>">
+          </div> 
+          <div class="col-md-6"> 
+            <div id="product" class="info-right"> 
 
+              <form class="form-horizontal" id="signupForm" action="<?=base_url('auth/updatepass')?>" method="post">
+                <div class="form-group">
+                  <label for="password" class="col-sm-2 control-label"><i class="fa fa-key fa-fw"></i></label>
+                  <div class="col-sm-6">
+                    <input type="password" class="form-control" name="password" id="password"  placeholder="Password">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="repassword" class="col-sm-2 control-label"><i class="fa fa-key fa-fw"></i></label>
+                  <div class="col-sm-6">
+                    <input type="password" class="form-control" name="repassword" id="repassword"  placeholder="Re Password">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-6">
+                    <input type="hidden" class="form-control" name="uid" id="uid"  value="<?php echo $uid;?>">
+                  </div>
+                </div>
 
-          <?php 
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">确定</button>
+                  </div>
+                </div>
 
-          foreach ($searchresult as $book)
-          {
-
-          ?>  
-
-          <div class="row">
-            <div class="col-md-2">
-                <a href="#">
-                    <img class="img-responsive" src="<?php echo $book->bookimg?>" alt="">
-                </a>
+                
+              </form>
             </div>
-            <div class="col-md-10">
-                <h3><?php echo $book->booktitle; ?></h3>
-                <p class="">
-                  <span><?php echo $book->author; ?><span> /
-                  <span><?php echo $book->publisher;?></span>
-
-                </p>
-                <p class="search_now_price">
-                  <i class="fa fa-rmb fa-1x"></i><?php echo $book->price; ?>
-                </p>
-                <p class="book-info"><?php echo $book->abstract; ?></p>
-                <!-- <a class="btn btn-primary" href="<?php echo base_url('book/addOneToCart/'.$book->id.'/'.'1')?>"><i class="fa fa-cart-arrow-down fa-1x"></i>
-                  加入购物车 </a> -->
-                <a target="_blank"class="btn btn-primary" href="<?php echo base_url('book/detail/'.$book->id);?>"> 详细信息 <span class="glyphicon glyphicon-chevron-right"></span></a>
-            </div>
+          </div> 
         </div>
-
-        <?php } ?>
-            
-        </div>
-
 
 
     </div> <!-- /container -->
@@ -80,7 +79,7 @@
 <div id="push-footer"></div> 
 <div class="container"> 
   <div class="row mobile-hidden"> 
-
+  
   </div> 
   <hr> 
   <div class="row"> 
@@ -95,11 +94,15 @@
 </div> 
 
     <?php $this->load->view('script')?>
+    <script src="<?=base_url('public/js/signupform.js')?>"></script>
+    <script src="<?=base_url('public/js/additional-methods.js')?>"></script>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
     <script src="<?=base_url('public/js/jquery.js')?>"></script>
     <script src="<?=base_url('public/js/bootstrap.min.js')?>"></script>  -->  
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+ 
+
   </body>
 </html>

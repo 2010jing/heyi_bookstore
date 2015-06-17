@@ -49,6 +49,7 @@ class Books_model extends CI_Model {
 
     }
 
+    //测试
     function tt(){
         $this->db->set('grade',1);
         $this->db->update('heyi_books');

@@ -10,9 +10,10 @@
     <link href="<?=base_url('public/css/bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?=base_url('public/css/font-awesome.min.css')?>" rel="stylesheet">
     <!-- <link href="http://fontawesome.dashgame.com/assets/font-awesome/css/font-awesome.css" rel="stylesheet"> -->
+    <link href="<?=base_url('public/css/style.css')?>" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="<?=base_url('public/css/style.css')?>" rel="stylesheet">
+    <link href="<?=base_url('public/css/rippler.min.css')?>" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -68,7 +69,7 @@
 
                                 件
                             </div>
-                            <a type="button" class="btn btn-primary addtocart">    
+                            <a type="button" class="btn btn-primary rippler rippler-inverse addtocart">    
                                 <i class="fa fa-cart-arrow-down fa-1x"></i>
                                 加入购物车 
                             </a>
@@ -95,7 +96,8 @@
                 </div>
                 <div class="col-md-10">
                     <!-- for some ads -->
-                    <p> 内容概要 </p>
+                    <p> 内容概要 </p> 
+
                     <hr class="divider" />
                     <?php echo $book->abstract; ?>
 
@@ -153,8 +155,17 @@
             });
         });
 
+
+        $(document).ready(function() { $(".rippler").rippler({ effectClass : 'rippler-effect' ,effectSize : 16 
+        // Default size (width & height) 
+        ,addElement : 'div' 
+        // e.g. 'svg'(feature)
+         ,duration : 400 }); 
+        });
+
     </script>
     <script src="<?=base_url('public/js/cart.js')?>"></script>
+    <script src="<?=base_url('public/js/jquery.rippler.min.js')?>"></script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
     <script src="<?=base_url('public/js/jquery.js')?>"></script>

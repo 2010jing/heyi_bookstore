@@ -14,17 +14,21 @@ $().ready(function() {
               minlength: 6,
               equalTo: "#password"
           },
-          email: {
-              required: true,
-              email: true
-          },
 
           tel: {
+            isTel: true,
             required:true,
             minlength: 11,
-            maxlength: 11,
-            digits:true
+            maxlength: 11
+          },
+
+          email: {
+              isUICEmail: true,
+              required: true,
+              email: true
           }
+
+          
     
       },
       messages: {
@@ -48,13 +52,14 @@ $().ready(function() {
               equalTo: "与上面密码不相符"
           },
           tel:{
+              //isTel:"手机号码只能为11位数字"
               required:"请输入手机号码",
               minlength: "手机号码为11位数",
-              maxlength: "手机号码为11位数",
-              digits:"手机号码只能为数字"
+              maxlength: "手机号码为11位数"
           },
           
           email: {
+
               required: "请输入uic 邮箱地址",
               email: "请输入有效的邮箱地址",
           }

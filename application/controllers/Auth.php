@@ -46,12 +46,14 @@ class Auth extends CI_Controller {
 
     //登录
 	function signin(){
-		if($_POST){
+		if(!empty($_POST)){
 			$this->load->model('User_model');
 			$result = $this->User_model->getUser();
 			if($result == null){
-				echo "nonono...";
+				//echo "nonono...";
 				//redirect(base_url(),'reload');
+				redirect(base_url('auth/index'),'reload');
+
 			}else{
 					$this->session->set_userdata('name',$result->name);
 					$this->session->set_userdata('email',$result->email);
@@ -61,7 +63,7 @@ class Auth extends CI_Controller {
 			}
 		}else{
 			
-			redirect(base_url(),'reload');
+			redirect(base_url('auth/index'),'reload');
 		}
 	}
 
@@ -129,8 +131,8 @@ class Auth extends CI_Controller {
 		if($type == "active"){
 			echo "<script>alert('Active link has been send to your UIC email!');window.location='http://mis.uic.edu.hk/';</script>";
 			//redirect('http://webmail.uic.edu.hk/extmail/cgi/index.cgi');
-		}elseif ($type == "forgetpwd") {
-			redirect(base_url('auth/forgetPassword'),'reload');
+		}elseif ($type == "forgepass") {
+			echo "<script>alert('Reset password link has been send to your UIC email!');window.location='http://mis.uic.edu.hk/';</script>";
 		}
   	}
 
@@ -176,6 +178,78 @@ class Auth extends CI_Controller {
 		if($status->status == "0"){
 			$this->User_model->deleteUserById($id);
 		}
+	}
+
+	function forget(){
+		$this->load->view('forgetpass');
+	}
+
+	function forgetpass(){
+		if(!empty($_POST)){
+			$this->load->model('User_model');
+			$result = $this->User_model->getUserByEmailName();
+			if(!empty($result)){
+				$name = $result->name;
+		    	$email = $result->email;
+		    	$division = $result->division;
+		    	$tel = $result->tel;
+		    	$str = $name.$email.$division.$tel."forget";
+		    	$id_num = $result->id; 
+				$token = $this->encode_text($str,"heyi_books","encode",3600);
+				$link=base_url()."auth/resetpass/".$id_num."/".$token; 
+				$subject = "找回密码 -- 合一书店!";
+				$message = "<h3>Welcome ".$name.",</h3><h4>   <br> Please click below link to reset your password:<br><a  target='_blank' href='".$link."'>".$link."</a><br> @合一书店!";
+		    	$type = "forgepass";
+	            //$this->sendEmail($email,$subject,$message,$type); 
+	            $this->sendEmail("77413446@qq.com",$subject,$message,$type); 
+
+
+			}else{
+				echo "<script>alert('Your information does not match!');window.location='".base_url('auth/forget')."';</script>";
+			}
+			//var_dump(empty($result));
+			//var_dump($result);
+
+
+
+		}else{
+			redirect(base_url('auth/forget'));
+		}
+		//$this->load->view('forgetpass');
+	}
+
+	function resetpass($id_num,$token){
+		$this->load->model('User_model');
+	    $result = $this->User_model->getUserById($id_num);
+	    if(empty($result)){
+	    	echo "<script>alert('The user does not exist ! Register again.');</script>";
+			redirect(base_url(),'reload');
+	    }else{
+	    	$name = $result->name;
+	    	$email = $result->email;
+	    	$division = $result->division;
+	    	$tel = $result->tel;
+	    	$str = $name.$email.$division.$tel."forget";
+	    	$id = $result->id; 
+	    	$data['uid'] = $id;
+			$_str = $this->encode_text($token,"heyi_books","decode",3600);
+			if($str == $_str){
+				$this->load->view('resetpass',$data);
+			}else{
+	    		echo "<script>alert('The resetpass time is over!');</script>";
+	    		redirect(base_url('auth/forget'),'reload');
+			}
+	    }
+	}
+
+	function updatepass(){
+		$this->load->model('User_model');
+	    $result = $this->User_model->updateUserPassword();
+	    if($result){
+			echo "<script>alert('Update your password successfully!');window.location='".base_url('auth/signin')."';</script>";
+	    }else{
+			echo "<script>alert('Update your password failed!');window.location='".base_url('auth/forget')."';</script>";
+	    }
 	}
 
 	  	//加密字符串

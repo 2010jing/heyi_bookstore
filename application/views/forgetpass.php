@@ -40,29 +40,33 @@
           <div class="col-md-6"> 
             <div id="product" class="info-right"> 
 
-              <form class="form-horizontal" action="<?=base_url('auth/signin')?>" method="post">
+              <form class="form-horizontal" id="forgetForm" action="<?=base_url('auth/forgetpass')?>" method="post">
+                
+                <div class="form-group">
+                  <label for="name" class="col-sm-2 control-label"><i class="fa fa-user fa-fw"></i></label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" name="name" id="name"  placeholder="Nickname">
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label"><i class="fa fa-envelope-o fa-fw"></i></label>
                   <div class="col-sm-6">
-                    <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email">
+                    <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="UIC Email">
                   </div>
                 </div>
+                
+
                 <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label"><i class="fa fa-key fa-fw"></i></label>
-                  <div class="col-sm-6">
-                    <input type="password" class="form-control" name="password" id="inputPassword3" placeholder="Password">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">找回密码</button>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">登录</button>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    还没有账号？<i class="fa fa-cog"></i> <a href="<?=base_url('auth/register')?>">立即注册!</a> <i class="fa fa-spinner"></i> <a href="<?=base_url('auth/forget')?>">忘记密码?</a> 
+                    已有账号？<i class="fa fa-cog"></i> <a href="<?=base_url('auth')?>">直接登录!</a><br>
+                    没有账号？<i class="fa fa-cog"></i> <a href="<?=base_url('auth/register')?>">立即注册!</a> 
                   </div>
                 </div>
               </form>
@@ -79,42 +83,7 @@
 <div id="push-footer"></div> 
 <div class="container"> 
   <div class="row mobile-hidden"> 
-    <!-- <div class="col-lg-12"> 
-      <div class="col-md-3"> <a href="#">Picture Perfect Productions</a>
-        <p>                    We are Singapore based and covering Asia for digital and audio content production and full service video production solutions.
-                </p> 
-      </div> 
-      <div class="col-md-3"> 
-        <ul class="list-unstyled"> 
-          <li>Our Strength</li> 
-          <li><a href="">Professional</a></li> 
-          <li><a href="">Global</a></li> 
-          <li><a href="">Efficient</a></li> 
-        </ul> 
-      </div> 
-      <div class="col-md-3"> 
-        <ul class="list-unstyled"> 
-          <li>Our Services</li> 
-          <li><a href="product">Production Solutions</a></li> 
-          <li><a href="creativity">Creativity Consultation</a></li> 
-          <li><a href="video">Video Editing</a></li> 
-          <li><a href="webcasting">Webcasting</a></li> 
-          <li><a href="sound">Soundproof Recording</a></li> 
-          <li><a href="green">Green Screen Studio</a></li> 
-        </ul> 
-      </div> 
-      <div class="col-md-3"> 
-        <ul class="list-unstyled"> 
-          <li>Connect Us</li> 
-          <li><a href="https://twitter.com/cameracrewasia">Our Twitter</a></li> 
-          <li><a href="https://www.youtube.com/channel/UCuOByb10gg4vBBa4O97mYrw">Our Youtube</a></li> 
-          <li><a rel="publisher" href="https://plus.google.com/101734969803661518768">Our Google+</a></li> 
-          <li><a href="http://vimeo.com/user3458098">Our Vimeo</a></li> 
-          <li><a href="https://www.facebook.com/pages/Picture-Perfect-Productions-Singapore/117716621581247">Our Facebook</a></li> 
-          <li><a href="">Our Email</a></li> 
-        </ul> 
-      </div> 
-    </div> --> 
+
   </div> 
   <hr> 
   <div class="row"> 
@@ -130,7 +99,8 @@
 
     <?php $this->load->view('script')?>
 
-
+    <script src="<?=base_url('public/js/forgetForm.js')?>"></script>
+    <script src="<?=base_url('public/js/additional-methods.js')?>"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
     <script src="<?=base_url('public/js/jquery.js')?>"></script>
     <script src="<?=base_url('public/js/bootstrap.min.js')?>"></script>  -->  
